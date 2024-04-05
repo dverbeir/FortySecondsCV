@@ -627,9 +627,9 @@
 %                               SIDEBAR LAYOUT
 %-------------------------------------------------------------------------------
 % draw sidebar background on current page
-\newcommand{\drawSidebarBG}{%
+\newcommand{\drawSidebarBG}[1]{%
 	\AddToShipoutPictureBG*{%
-		\ifthenelse{\equal{\sidebarplacement}{right}}{%
+		\ifthenelse{\equal{#1}{right}}{%
 			\begin{tikzpicture}[remember picture, overlay]
 				\node at (current page.north east)[
 					rectangle,
@@ -661,9 +661,9 @@
 % the starred version for absolute values here, b/c we use \pagewidth directly
 % instead of \setlength{\TPHorizModule}{<dimen>}, which seems to be "absolute"
 % as opposed to "relative" - strange but true.
-\newenvironment{sidebar}{%
-	\drawSidebarBG%
-	\ifthenelse{\equal{\sidebarplacement}{right}}{%
+\newenvironment{sidebar}[1][\sidebarplacement]{%
+	\drawSidebarBG{#1}%
+	\ifthenelse{\equal{#1}{right}}{%
 		\begin{textblock*}{\sidebartextwidth}%
 			(\paperwidth - \sidebarwidth + \leftrightmargin, \topbottommargin)
 	}{% else
@@ -673,6 +673,8 @@
 	\end{textblock*}%
 }
 
+
+
 % provide user interface for easily adding new sections in side bars
 % default: empty sidebar
 \newcommand{\frontsidebar}{}
@@ -680,8 +682,8 @@
 \newcommand{\addtofrontsidebar}[1]{\apptocmd{\frontsidebar}{#1}{}{}}
 \newcommand{\addtobacksidebar}[1]{\apptocmd{\backsidebar}{#1}{}{}}
 
-\newcommand{\makefrontsidebar}{%
-	\begin{sidebar}
+\newcommand{\makefrontsidebar}[1]{%
+	\begin{sidebar}[#1]
 		% most sidebar commands end with \par; increase space between them
 		\setlength{\parskip}{1ex}
 
@@ -711,8 +713,8 @@
 	\end{sidebar}
 }
 
-\newcommand{\makebacksidebar}{%
-	\begin{sidebar}
+\newcommand{\makebacksidebar}[1]{%
+	\begin{sidebar}[#1]
 		% begin with name instead of picture
 		\nameandjob
 
