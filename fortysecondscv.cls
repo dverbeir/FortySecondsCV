@@ -298,6 +298,9 @@
 % style for job title
 \newcommand*{\cvjobtitleformat}{\Large\color{black!80}}
 
+% style for "location"
+\newcommand{\cvitemlocationformat}{\footnotesize}
+
 % mandatory personal information
 \newcommand*{\cvname}[1]{\renewcommand{\cvname}{#1}}
 \newcommand*{\cvjobtitle}[1]{\renewcommand{\cvjobtitle}{#1}}
@@ -770,10 +773,10 @@
 	\parbox[t]{0.98\textwidth-\datecolwidth}{%
 		\if\relax\detokenize{#4}\relax%
 			\parbox[t]{\linewidth-\widthof{\footnotesize #3}-1em}{\raggedright #2}%
-			\hfill {\footnotesize#3}%
+			\hfill {\cvitemlocationformat#3}%
 		\else%
 			\parbox[t]{\linewidth-\widthof{\footnotesize #3}-1em}{\raggedright \textbf{#2}}%
-			\hfill {\footnotesize#3} \\%
+			\hfill {\cvitemlocationformat#3} \\%
 			\textcolor{itemtextcolor}{#4}%\vspace{\parsep}%
 		\fi%
 	}\\
